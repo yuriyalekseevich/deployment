@@ -13,22 +13,29 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+
+    - name: Set up java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'zulu'
+        java-version: '17.0.6'
+        cache: 'gradle'
+        cache-dependency-path: | #optional
+          sub-project/*.gradle*
+          sub-project/**.gradle-wrapper.properties
     
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
         flutter-version: '3.24.5'
+        channel: 'stable'
+        cache: true
     
     - name: Install dependencies
-      run: |
-        flutter pub get
-        sudo apt-get install -y openjdk-11-jdk
-        sudo apt-get install -y android-sdk
+      run: flutter --version
+      run: flutter pub get
+      run: flutter test
         
-    - name: Set up Android SDK
-      run: |
-        yes | sdkmanager --licenses
-        sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
         
     - name: Build APK
       run: flutter build apk --release  # This will generate the APK for Android
@@ -40,33 +47,33 @@ jobs:
         path: build/app/outputs/flutter-apk/app-release.apk
 
   # Job for building iOS IPA
-  build_ios:
-    runs-on: macos-latest 
+  # build_ios:
+    # runs-on: macos-latest 
     
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+    # steps:
+    # - name: Checkout code
+    #   uses: actions/checkout@v3
     
-    - name: Set up Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '3.24.5' 
+    # - name: Set up Flutter
+    #   uses: subosito/flutter-action@v2
+    #   with:
+    #     flutter-version: '3.24.5' 
     
-    - name: Install dependencies
-      run: flutter pub get
+    # - name: Install dependencies
+    #   run: flutter pub get
     
-    - name: Build IPA
-      run: flutter build ios --release 
+    # - name: Build IPA
+    #   run: flutter build ios --release 
     
-    - name: Export IPA
-      run: |
-        cd ios
-        xcodebuild -workspace Runner.xcworkspace -scheme Runner -archivePath $PWD/build/ios/archives/Runner.xcarchive archive
-        xcodebuild -exportArchive -archivePath $PWD/build/ios/archives/Runner.xcarchive -exportPath $PWD/build/ios/ipa -exportOptionsPlist $PWD/ExportOptions.plist
-        mv $PWD/build/ios/ipa/Runner.ipa $PWD/Runner.ipa
+    # - name: Export IPA
+    #   run: |
+    #     cd ios
+    #     xcodebuild -workspace Runner.xcworkspace -scheme Runner -archivePath $PWD/build/ios/archives/Runner.xcarchive archive
+    #     xcodebuild -exportArchive -archivePath $PWD/build/ios/archives/Runner.xcarchive -exportPath $PWD/build/ios/ipa -exportOptionsPlist $PWD/ExportOptions.plist
+    #     mv $PWD/build/ios/ipa/Runner.ipa $PWD/Runner.ipa
     
-    - name: Upload IPA artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: ios-ipa
-        path: ios/Runner.ipa
+    # - name: Upload IPA artifact
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: ios-ipa
+    #     path: ios/Runner.ipa
