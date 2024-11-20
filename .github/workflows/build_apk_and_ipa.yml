@@ -14,13 +14,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Set up java
+    - name: Set up Java
       uses: actions/setup-java@v3
       with:
         distribution: 'zulu'
         java-version: '17.0.6'
         cache: 'gradle'
-        cache-dependency-path: | #optional
+        cache-dependency-path: |
           sub-project/*.gradle*
           sub-project/**.gradle-wrapper.properties
     
@@ -31,11 +31,11 @@ jobs:
         channel: 'stable'
         cache: true
     
-    - name: Install dependencies
-      run: flutter --version
-      run: flutter pub get
-      run: flutter test
-        
+    - name: Install dependencies and run tests
+      run: |
+        flutter --version
+        flutter pub get
+        flutter test
         
     - name: Build APK
       run: flutter build apk --release  # This will generate the APK for Android
@@ -45,6 +45,7 @@ jobs:
       with:
         name: android-apk
         path: build/app/outputs/flutter-apk/app-release.apk
+
 
   # Job for building iOS IPA
   # build_ios:
