@@ -61,7 +61,10 @@ jobs:
         flutter-version: '3.24.3' 
     
     - name: Install dependencies
-      run: flutter pub get
+      run: |
+        flutter --version
+        flutter pub get
+        flutter test
     
     - name: Build IPA
       run: flutter build ios --release 
