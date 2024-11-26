@@ -67,7 +67,7 @@ jobs:
         flutter test
     
     - name: Build IPA
-      run: flutter build ios --release 
+      run: flutter build ios 
     
     - name: Export IPA
       run: |
