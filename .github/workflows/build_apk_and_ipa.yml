@@ -69,12 +69,12 @@ jobs:
     - name: Build IPA
       run: flutter build ios --release --no-codesign  # This will generate the IPA for iOS
     
-    - name: Export IPA
-      run: |
-        cd ios
-        xcodebuild -workspace Runner.xcworkspace -scheme Runner -archivePath $PWD/build/ios/archives/Runner.xcarchive archive
-        xcodebuild -exportArchive -archivePath $PWD/build/ios/archives/Runner.xcarchive -exportPath $PWD/build/ios/ipa -exportOptionsPlist $PWD/ExportOptions.plist
-        mv $PWD/build/ios/ipa/Runner.ipa $PWD/Runner.ipa
+    # - name: Export IPA
+      # run: |
+        # cd ios
+        # xcodebuild -workspace Runner.xcworkspace -scheme Runner -archivePath $PWD/build/ios/archives/Runner.xcarchive archive
+        # xcodebuild -exportArchive -archivePath $PWD/build/ios/archives/Runner.xcarchive -exportPath $PWD/build/ios/ipa -exportOptionsPlist $PWD/ExportOptions.plist
+        # mv $PWD/build/ios/ipa/Runner.ipa $PWD/Runner.ipa
     
     - name: Upload IPA artifact
       uses: actions/upload-artifact@v3
