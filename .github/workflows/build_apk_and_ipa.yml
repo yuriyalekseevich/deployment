@@ -67,12 +67,6 @@ jobs:
         flutter test
 
     - name: Create build directory
-      run: mkdir -p ios/build
-
-     - name: Create build/ios directory
-      run: mkdir -p ios/build/ios
-
-    - name: Create build/ios/ipa directory
       run: mkdir -p ios/build/ios/ipa
     
     - name: Build IPA
