@@ -76,6 +76,11 @@ jobs:
         # xcodebuild -exportArchive -archivePath $PWD/build/ios/archives/Runner.xcarchive -exportPath $PWD/build/ios/ipa -exportOptionsPlist $PWD/ExportOptions.plist
         # mv $PWD/build/ios/ipa/Runner.ipa $PWD/Runner.ipa
 
+        
+    - name: List ios directory contents
+      run: ls -R ios
+    
+    
     - name: List directory contents
       run: ls -R ios/build
     
