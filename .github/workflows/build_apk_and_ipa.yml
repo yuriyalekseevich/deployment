@@ -65,9 +65,6 @@ jobs:
         flutter --version
         flutter pub get
         flutter test
-
-    - name: Create build directory
-      run: mkdir -p ios/build/ios/ipa
     
     - name: Build IPA
       run: flutter build ios --release --no-codesign  # This will generate the IPA for iOS
@@ -78,19 +75,6 @@ jobs:
         # xcodebuild -workspace Runner.xcworkspace -scheme Runner -archivePath $PWD/build/ios/archives/Runner.xcarchive archive
         # xcodebuild -exportArchive -archivePath $PWD/build/ios/archives/Runner.xcarchive -exportPath $PWD/build/ios/ipa -exportOptionsPlist $PWD/ExportOptions.plist
         # mv $PWD/build/ios/ipa/Runner.ipa $PWD/Runner.ipa
-
-
-    - name: List ios directory contents
-      run: ls -R ios
-
-    - name: List ios/Runner directory contents
-      run: ls -R ios/Runner
-    
-    - name: List ios/Flutter directory contents
-      run: ls -R ios/Flutter
-    
-    - name: List directory contents
-      run: ls -R ios/build
     
     - name: Upload IPA artifact
       uses: actions/upload-artifact@v3
