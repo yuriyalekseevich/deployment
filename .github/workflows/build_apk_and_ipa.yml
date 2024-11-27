@@ -6,7 +6,7 @@ on:
       - develop   # Trigger on pushes to the develop branch
 
 jobs:
-  Job for building Android APK on Ubuntu
+  # Job for building Android APK on Ubuntu
   build_android:
     runs-on: ubuntu-latest
     
