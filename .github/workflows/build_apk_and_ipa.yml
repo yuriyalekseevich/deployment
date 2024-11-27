@@ -68,7 +68,6 @@ jobs:
     
     - name: Build IPA
       run: flutter build ios --release --no-codesign  # This will generate the IPA for iOS
-      echo "Build completed"
     
     # - name: Export IPA
       # run: |
