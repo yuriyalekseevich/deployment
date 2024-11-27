@@ -96,5 +96,5 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: ios-ipa
-        path: ios/Runner.ipa
+        path: ios/build/ios/ipa/Runner.ipa
   
