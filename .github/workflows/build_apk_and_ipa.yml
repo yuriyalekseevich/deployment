@@ -69,10 +69,10 @@ jobs:
     - name: Create build directory
       run: mkdir -p ios/build
 
-     - name: Create build directory
+     - name: Create build/ios directory
       run: mkdir -p ios/build/ios
 
-    - name: Create build directory
+    - name: Create build/ios/ipa directory
       run: mkdir -p ios/build/ios/ipa
     
     - name: Build IPA
