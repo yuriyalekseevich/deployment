@@ -67,7 +67,7 @@ jobs:
         flutter test
     
     - name: Build IPA
-      run: flutter build ios 
+      run: flutter build ios --release --no-codesign  # This will generate the IPA for iOS
     
     - name: Export IPA
       run: |
