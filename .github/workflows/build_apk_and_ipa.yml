@@ -65,6 +65,9 @@ jobs:
         flutter --version
         flutter pub get
         flutter test
+
+    - name: Create build directory
+      run: mkdir -p ios/build
     
     - name: Build IPA
       run: flutter build ios --release --no-codesign  # This will generate the IPA for iOS
