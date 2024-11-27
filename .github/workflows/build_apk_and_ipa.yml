@@ -75,6 +75,9 @@ jobs:
         # xcodebuild -workspace Runner.xcworkspace -scheme Runner -archivePath $PWD/build/ios/archives/Runner.xcarchive archive
         # xcodebuild -exportArchive -archivePath $PWD/build/ios/archives/Runner.xcarchive -exportPath $PWD/build/ios/ipa -exportOptionsPlist $PWD/ExportOptions.plist
         # mv $PWD/build/ios/ipa/Runner.ipa $PWD/Runner.ipa
+
+    - name: List directory contents
+      run: ls -R ios/build
     
     - name: Upload IPA artifact
       uses: actions/upload-artifact@v3
